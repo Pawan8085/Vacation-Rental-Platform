@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="host/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>All Properties</title>
+</head>
+<body>
+
+	<section>
+		<!-- message for empty contact -->
+		<div class="container text-center"
+			th:if="${properties.getTotalElements() == 0}">
+			<h2>You haven't added any property yet!</h2>
+			<a class="btn btn-primary mt-2" href="/host/add-property">Add
+				Property</a>
+		</div>
+
+
+
+		<div class="card mr-3 ml-3"
+			th:classappend="${properties.getTotalElements() == 0 ? 'd-none' : ''}">
+			
+			<div class="card-body">
+
+				<h1 class="text-center">Your Properties</h1>
+				
+				<div style="height: 15px;" class="mt-2">
+				<div th:if="${session.message}"
+					th:classappend="${session.message.type}" role="alert">
+					<p class="text-center" th:text="${session.message.content}"></p>
+
+					<!-- remove message from session -->
+					<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+
+				</div>
+			</div>
+
+				<!-- Search functionality -->
+				<div class="search-container my-3">
+					<input th:onkeyup="|search(${currentPage})|" id="search-input" type="text"
+						class="form-control" placeholder="Search your property here">
+					<div class="search-result">
+						<!-- Result goes here -->
+
+					</div>
+				</div>
+
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">#ID</th>
+								<th scope="col">Property Name</th>
+								<th scope="col">Rating</th>
+								<th scope="col">Price for a night</th>
+								<th scope="col"> Know More </th>
+								<th scope="col">Action 1</th>
+								<th scope="col">Action 2</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="p : ${properties}">
+								<th scope="row" th:text="${'PR'+p.porpertyId}">1</th>
+								<td th:text="${p.propertyName}"></td>
+								<td class="card-text mb-0" >
+									<i class="fa fa-star"></i>
+									<span th:text="${ p.rating == null ? '0.0': ' ' + p.rating}"></span>
+									
+								</td>
+								<td th:text="${p.oneNightPrice}"></td>
+								<td> <a th:href="@{'/host/property/'+${p.porpertyId}+'?currentPage='+${currentPage}}" style="text-decoration: none;">View More Details</a> </td>
+								
+								<td><a class="btn btn-danger btn-small" th:onclick="|deleteProperty(${p.porpertyId}, ${currentPage})|">Delete</a></td>
+
+								<td>
+									<form th:action="@{'/host/update-property/'+${p.porpertyId}+'?currentPage='+${currentPage}}"
+										 class="mt-3">
+										<input type="hidden" name="currentPage"
+											th:value="${currentPage}">
+										<button style="margin-top: -23px;" type="submit"
+											class="btn btn-primary btn-small">Update</button>
+									</form>
+								</td>
+
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Pagination Part -->
+				<nav area-label="Page Navigation example">
+					<ul class="pagination">
+						<li th:if="${currentPage != 0}" class="page-item"><a
+							th:href="@{'/host/show-properties/'+${currentPage-1}}"
+							class="page-link" href="#">Previous</a></li>
+
+						<li class="page-item"
+							th:classappend="${currentPage == i-1 ? 'active' : ''}"
+							th:each="i : ${#numbers.sequence(1, totalPages)}"><a
+							th:href="@{'/host/show-properties/'+${i-1}}" class="page-link"
+							href="#"> <span th:text="${i}"></span>
+						</a></li>
+
+						<li th:if="${currentPage+1 != totalPages}" class="page-item">
+							<a th:href="@{'/host/show-properties/'+${currentPage+1}}"
+							class="page-link" href="#">Next</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<script>
+		$(document).ready(() =>{
+			$(".item").removeClass("active");
+			$("#contacts-link").addClass("active");
+		});
+		</script>
+	</section>
+</body>
+</html>

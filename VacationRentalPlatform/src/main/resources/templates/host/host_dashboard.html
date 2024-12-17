@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="host/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>This is Home page</title>
+</head>
+<body>
+	
+	<section  >
+		
+		<div class="container">
+		
+		<div class="card">
+			<div class="card-body">
+				<div class="container text-center">
+				<img style="height: 200px; width: 200px" class="my_profile_picture"
+						alt="profilePhoto" src="/images/profile.png">
+						<p class="font-italic mt-1">Hello, <span th:text="${currentHost.name}"></span> </p>
+				</div>
+				<h1 class="text-center mt-3 text-secondary font-italic font-weight-light">Haven't added any property yet ? add using below link</h1>
+				<a  href="/host/add-property" type="button" class="btn btn-primary btn-lg btn-block mt-4">Add Property</a>
+				
+				
+				
+			</div>
+			
+		</div>
+		</div>
+	</section>
+</body>
+</html>

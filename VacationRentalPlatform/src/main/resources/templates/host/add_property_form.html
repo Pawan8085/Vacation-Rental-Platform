@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="host/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>This is Home page</title>
+</head>
+<body>
+	
+	<section>
+	<div class="card mr-3 ml-3 ">
+		<div th:if="${session.message}" th:classappend="${session.message.type}" role="alert">
+			<p class="text-center" th:text="${session.message.content}"></p>
+					
+				<!-- remove message from session -->
+			   <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+				
+		</div>
+		<div class="card-body ">
+		<h1 class="text-center">Add Property</h1>
+			
+			<div class="container-fluid mt-1 d-flex justify-content-center">
+				
+				<div class="col-md-8 offset-md-1">
+					<form  th:object="${property}" 
+					enctype="multipart/form-data" 
+					method="POST"
+					action="/host/process-property"
+					class="mt-2"
+					>
+					
+					<!-- image link -->
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-picture-o"></i>
+							</div>
+						</div>
+						<input required type="text"  name="imgLink" placeholder="Enter image link here" class="form-control">
+					</div>
+					
+					<!-- location -->
+					<div class="input-group mt-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-location-arrow"></i>
+							</div>
+						</div>
+						<input required type="text" name="location" placeholder="Enter property location here" class="form-control">
+					</div>
+					
+					<!-- Property name -->
+					<div class="input-group mt-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-plus"></i>
+							</div>
+						</div>
+						<input required type="text"  name="propertyName" placeholder="Enter your property name" class="form-control">
+					</div>
+					
+					
+					
+					<!-- Price -->
+					<div class="input-group mt-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-money"></i>
+							</div>
+						</div>
+						<input required type="text"  name="oneNightPrice" placeholder="Price for one night" class="form-control">
+					</div>
+					
+					<!-- Property Description -->
+					<div class="input-group mt-3">
+						<textarea id="mytextarea"  placeholder="Enter things that your property offers" name="offers"  class="form-control" rows="10" ></textarea>
+					</div>
+					
+					
+					
+					<!-- Submit button -->
+					<div class="container text-center mt-4">
+					<button class="btn btn-outline-primary">Save Property</button>
+					</div>
+					
+					</form>
+				</div>
+				
+				
+				
+			
+			
+			</div>
+			
+		</div>
+	</div>
+	</section>
+</body>
+</html>

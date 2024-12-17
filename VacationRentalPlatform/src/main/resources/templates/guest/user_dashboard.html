@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="guest/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>This is Home page</title>
+</head>
+<body>
+
+	<section>
+		<div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="my-card mt-3">
+                        <div th:if="${session.message}" th:classappend="${session.message.type}" role="alert">
+                            <p class="text-center" th:text="${session.message.content}"></p>
+                            <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+                        </div>
+                        <h3 class="text-center">Update Your Details Here</h3>
+                        <form  action="/user/profile-update" method="post" th:object="${user}" class="mt-4">
+                        	
+                        	<!-- This fild we need for updation -->
+                        	<input type="hidden" th:value="${guest.guestId}" name="guestId">
+                        	
+                            <!-- name field -->
+                            <div class="form-group">
+                                <label for="name_field">Your Name</label>
+                                <input type="text" name="name" th:value="${guest.name}" class="form-control" id="name_field" aria-describedby="emailHelp" placeholder="Enter here" required>
+                            </div>
+                            <!-- email field -->
+                            <div class="form-group">
+                                <label for="email_field">Your Email</label>
+                                <input type="email" name="email" th:value="${guest.email}" class="form-control" id="email_field" aria-describedby="emailHelp" placeholder="Enter here" required>
+                            </div>
+                           
+                            <!-- gender dropdown -->
+                            <div class="form-group">
+                                <label for="user_gender">Gender</label>
+                                <select class="form-control" id="user_gender" th:value="${guest.gender}" th:field="${user.gender}">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <!-- dob field -->
+                            <div class="form-group">
+                                <label for="user_dob">Date Of Birth</label>
+                                <input type="date" name="dateOfBirth" th:value="${guest.dateOfBirth}" class="form-control" id="user_dob" aria-describedby="emailHelp" required>
+                            </div>
+                            <!--  about field -->
+                            <div class="form-group">
+                                <textarea name="bio" th:text="${guest.bio}" placeholder="Enter something about yourself" rows="5" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="agreement">
+                                <label for="agreement" class="form-check-label">Accept terms and conditions</label>
+                            </div>
+                            <div class="container text-center">
+                                <button type="submit" class="btn bg-primary text-white">Update</button>
+                                <button type="reset" class="btn btn-warning text-white">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</section>
+</body>
+</html>

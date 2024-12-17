@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="guest/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>This is Home page</title>
+</head>
+<body>
+
+	<section>
+		<div>
+			<h4 class="text-center" th:text="${bookings.size() == 0 ? 'No booking so far ! ' : 'Your Bookings'}">Your Bookings</h4>
+			<p ></p>
+			<div th:each="b : ${bookings}" class="mt-5">
+				<div class="d-flex justify-content-around px-5 mt-2" style="width: 600px; margin: auto;">
+					<div>
+						<img alt="" th:src="${b.img}" style="height: 200px;">
+					</div>
+					<div>
+						<p>
+							host : <span th:text="${b.hostedBy}"></span>
+						</p>
+						<p th:text="${b.propertyName}"></p>
+						<p class="card-title ">
+							<span class="font-weight-bold">&#8377;</span><span
+								class="font-weight-bold" th:text="${' '+b.oneNightPrice}"></span>
+							night
+						</p>
+
+						<p>
+							Total Nights : <span th:text="${b.numberOfNights}"></span>
+						</p>
+						<a th:href="@{'/property/' + ${b.property.porpertyId}}" class="btn btn-outline-primary btn-sm">Add Rating</a>
+					</div>
+				</div>
+				<hr>
+			</div>
+		</div>
+
+	</section>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>This is Home page</title>
+</head>
+<body>
+	<section
+		
+		
+		th:if="${totalPages > 0}" class="banner d-flex justify-content-center align-items-center">
+		<div class="container-md px-2 mt-5">
+			<div class="row mt-3">
+				<!-- Filters column -->
+				<div class="col-md-2">
+					
+
+					<div class="card mb-4 h-100" style="width: 220px;">
+						<div class="card-body">
+							<h5 class="mb-4">Filter Property</h5>
+							<!-- Location filter -->
+							<div class="form-group">
+								<div class="input-group mt-3" style="cursor: pointer;">
+									
+									<input required type="text" name="location"
+										placeholder="Enter Location"
+										class="form-control" id="locationInput">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fa fa-search"  onclick="locationFilter()"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Property Type filter -->
+							<div class="form-group">
+								 <select
+									class="form-control" id="propertyType" onchange="propertyFilter()">
+									<option value="">Property Type</option>
+									<option value="APARTMENT">Apartment</option>
+									<option value="HOUSE">House</option>
+									<option value="UNIQUE_HOMES">Unique Homes</option>
+								</select>
+							</div>
+
+							<!-- Host filter -->
+							<div class="form-group">
+								<div class="input-group mt-3">
+								<input required type="text" name="location"
+										placeholder="Enter Host"
+										class="form-control" id="hostInput">
+								<div class="input-group-prepend" style="cursor: pointer;">
+										<div class="input-group-text">
+											<i class="fa fa-search"  onclick="hostFilter()"></i>
+										</div>
+								</div>
+								</div>
+							</div>
+							
+							
+							
+							<h5 class="mb-4 mt-5">Sort Property</h5>
+							<!-- Location Sorting -->
+							<div class="form-group">
+								
+								<button class="btn btn-outline-primary w-100" onclick="locationSorting()">Location</button>
+							</div>
+							
+							<!-- Property Type Sorting -->
+							<div class="form-group">
+								<button class="btn btn-outline-primary w-100" onclick="propertyTypeSorting()" >PropertyType</button>
+							</div>
+							
+							
+						</div>
+					</div>
+
+				</div>
+				<!-- Content column -->
+				<div  class="col-md-10">
+					<!-- Adjusted width to 10 out of 12 -->
+					<div class="row">
+						<!-- Iterate over properties -->
+						<div class="col-md-4" th:each="property : ${properties}">
+							<div class="card mb-4" style="cursor: pointer;" th:onclick="|viewProperty(${property.porpertyId})|" >
+								<!-- Property image -->
+								<img th:src="${property.imgLink}" class="card-img-top"
+									alt="Property Image">
+								<div class="card-body">
+									<!-- Property location -->
+									<p th:text="${property.location}"></p>
+									<div class="d-flex justify-content-between align-items-center">
+										
+										<!-- Property name -->
+										<p class="card-title font-weight-bold"
+											th:text="${property.propertyName}"></p>
+										
+										<p>
+											<span style="font-size: 19px;">&#9733;</span> <span th:text="${ property.rating == null ? '0': ' ' + property.rating}"></span>
+											
+										</p>
+										
+									</div>
+									<p class="card-title ">
+										<span class="font-weight-bold">&#8377;</span><span
+											class="font-weight-bold"
+											th:text="${' '+property.oneNightPrice}"></span> night
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Pagination Part -->
+					<nav area-label="Page Navigation example">
+						<ul class="pagination">
+							<li th:if="${currentPage != 0}" class="page-item"><a
+								th:href="@{'/'+${currentPage-1}+${url}}" class="page-link" href="#">Previous</a>
+							</li>
+
+							<li class="page-item"
+								th:classappend="${currentPage == i-1 ? 'active' : ''}"
+								th:each="i : ${#numbers.sequence(1, totalPages)}"><a
+								th:href="@{'/'+${i-1}+${url}}" class="page-link" href="#"> <span
+									th:text="${i}"></span>
+							</a></li>
+
+							<li th:if="${currentPage+1 != totalPages}" class="page-item">
+								<a th:href="@{'/'+${currentPage+1}+${url}}" class="page-link" href="#">Next</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+</body>
+</html>
