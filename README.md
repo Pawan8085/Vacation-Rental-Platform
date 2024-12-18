@@ -30,7 +30,18 @@ Developed a **Vacation Rental Platform** using **Spring MVC** framework and **Th
 - **Tools**: Maven, Spring Tool Suite (STS)  
 
 ---
+### URLs and Pages
+#### Public Pages:
+- **Home Page**: `http://localhost:8081/0`
+  
+![home](https://github.com/user-attachments/assets/f62849a8-0420-4555-b88f-3c031f448223)
 
+- **Sign-Up Page**: `http://localhost:8081/user-signup`
+  
+![v_signup](https://github.com/user-attachments/assets/2866f9c0-977a-4e19-87e0-228f29203175)
 
+- **Login Page**: `http://localhost:8081/signIn`
+
+![v_login](https://github.com/user-attachments/assets/fbd35754-230c-4e47-9e65-d9b8c8f310b6)
 
 
