@@ -44,4 +44,28 @@ Developed a **Vacation Rental Platform** using **Spring MVC** framework and **Th
 
 ![v_login](https://github.com/user-attachments/assets/fbd35754-230c-4e47-9e65-d9b8c8f310b6)
 
+- **View Property Page**: `http://localhost:8081/property/102`
 
+![v_viewProperty](https://github.com/user-attachments/assets/fcb59f66-9102-4987-a637-95a4ecbc77ac)
+
+---
+#### Host Pages:
+- **Host Home Page**: `http://localhost:8081/host/index`
+  
+  ![v_host_home](https://github.com/user-attachments/assets/2e710a81-e1a7-40dc-8046-998453b0abdc)
+
+  - **Host Profile Page**: `http://localhost:8081/host/profile`
+    
+![v_host_profile](https://github.com/user-attachments/assets/12433583-039e-4b18-9de1-72b0fbfd3a65)
+
+- **Host Add Property Page**: `http://localhost:8081/host/add-property`
+  
+![v_add_property](https://github.com/user-attachments/assets/db1c028d-0b0d-437b-a8df-857002d052f7)
+
+- **Host View Properties Page**: `http://localhost:8081/host/show-properties/0`
+  
+![v_host_properties](https://github.com/user-attachments/assets/f2bd5f3b-a60f-452c-bd88-9e0fda9e37bb)
+
+- **Host Setting Page**: `http://localhost:8081/host/setting`
+  
+![v_host_setting](https://github.com/user-attachments/assets/3df35333-b588-4da9-a9c7-4d6f6ceabac2)
